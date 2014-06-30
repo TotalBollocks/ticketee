@@ -1,11 +1,12 @@
 require 'spec_helper'
 
-describe "Creating projects" do
-  specify "can create a project" do
+feature "Creating projects" do
+  before do
     visit '/'
-    
     click_link "New Project"
-    
+  end
+  
+  scenario "can create a project" do    
     fill_in "Name", with: "TextMate 2"
     fill_in "Description", with: "A text editor"
     click_button "Create Project"
@@ -17,5 +18,12 @@ describe "Creating projects" do
     expect(page.current_url).to eql project_url(project)
     title = "Ticketee - Projects - TextMate 2"
     expect(page).to have_title title
+  end
+  
+  specify "cant create project without name" do
+    click_button "Create Project"
+    
+    expect(page).to have_content "Project has not been created"
+    expect(page).to have_content "Name can't be blank"
   end
 end
