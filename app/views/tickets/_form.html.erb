@@ -1,0 +1,23 @@
+<% if @ticket.errors.any? %>
+  <div class="error_explanation">
+    <%=pluralize @ticket.errors.count, "error" %> prohibiting this ticket from being created:
+  </div>
+
+  <ul>
+    <% @ticket.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for([@project, @ticket]) do |f| %>   
+  <p>    
+    <%= f.label :title %><br />    
+    <%= f.text_field :title %>  
+  </p>
+  <p>    
+    <%= f.label :description %><br />    
+    <%= f.text_field :description %>  
+  </p>
+  <%= f.submit %> 
+<% end %>
