@@ -1,7 +1,11 @@
 <% title("Projects", @project.name) %>
 <h1><%= @project.name %></h1>
-<%= link_to "Edit Project", edit_project_path(@project) %>
-<%= link_to "Delete Project", @project, method: :delete, data: {confirm: "Are you sure?"} %>
+
+<% admin_only do %>
+  <%= link_to "Edit Project", edit_project_path(@project) %>
+  <%= link_to "Delete Project", @project, method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
+
 <%= link_to "Create Ticket", [:new, @project, :ticket] %>
 <ul id="tickets">
   <% @project.tickets.each do |ticket| %>
