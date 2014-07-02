@@ -3,6 +3,6 @@ FactoryGirl.define do
     sequence(:name) {|n| "User-#{n}"}
     email { "#{name}@example.com".downcase }
     password "secret"
-    password_confirmation "secret"
+    password_confirmation {password}
   end
 end
