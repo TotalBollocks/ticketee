@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature "Creating projects" do
   before do
-    visit '/'
+    sign_in_as(create(:admin))
     click_link "New Project"
   end
   
