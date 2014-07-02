@@ -23,6 +23,12 @@
   <nav>
     <li><%= link_to "Sign up", new_user_path %></li>
     <li><%= link_to "Sign in", signin_path %></li>
+    <% if current_user %>
+      Signed in as <%= current_user.email %>
+    <% admin_only do %>
+      <%= link_to "Admin", admin_root_path %>
+    <% end %>
+    <% end %>  
   </nav>
 <%= yield %>
 
