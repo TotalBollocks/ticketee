@@ -4,7 +4,7 @@ feature 'Editing projects' do
   before do
     project = create :project
     
-    visit '/'
+    sign_in_as create(:admin)
     click_link project.name
     click_link 'Edit Project'
   end
