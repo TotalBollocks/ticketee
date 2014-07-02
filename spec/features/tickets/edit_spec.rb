@@ -3,9 +3,11 @@ require 'spec_helper'
 feature "Editing tickets" do
   let!(:project) {create :project}
   let!(:ticket) {create :ticket, project: project}
+  let(:user) {create :user}
   
   before do
     visit '/'
+    sign_in_as(user)
     click_link project.name
     click_link ticket.title
     click_link "Edit Ticket"

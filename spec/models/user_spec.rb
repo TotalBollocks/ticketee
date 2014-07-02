@@ -26,11 +26,11 @@ describe User do
     let(:user) {User.create name: "Bob", password: "secret", password_confirmation: "secret"}
     
     it "authenticates with correct password" do
-      expect(user.authenticate("secret")).to be_true
+      expect(user.authenticate("secret")).to be_truthy
     end
     
     it "doesnt authenticate with incorrect password" do
-      expect(user.authenticate("wrong")).to be_false
+      expect(user.authenticate("wrong")).to be_falsey
     end
   end
 end
