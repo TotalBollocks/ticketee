@@ -3,8 +3,9 @@ require 'spec_helper'
 feature 'Editing projects' do
   before do
     project = create :project
-    
-    sign_in_as create(:admin)
+    admin = create :admin
+
+    sign_in_as admin
     click_link project.name
     click_link 'Edit Project'
   end

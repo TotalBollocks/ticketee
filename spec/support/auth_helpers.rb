@@ -7,6 +7,10 @@ module AuthHelpers
     click_button "Sign in"
     expect(page).to have_content "You have signed in"
   end
+  
+  def define_permission(user, action, thing)
+    Permission.create! user: user, action: action, thing: thing
+  end
 end
 
 RSpec.configure do |c|

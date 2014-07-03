@@ -2,22 +2,14 @@ require 'spec_helper'
 
 feature "Creating tickets" do
   let(:user) {create :user}
+  let(:project) {create :project}
   before do
-    project = create :project
+    define_permission user, "view", project
+    sign_in_as user
     
-    visit '/'
     click_link project.name
     click_link "Create Ticket"
     
-    message = "You need to sign in to do this"
-    expect(page).to have_content message
-    
-    fill_in "Name", with: user.name
-    fill_in "Password", with: user.password
-    click_button "Sign in"
-    
-    click_link  project.name
-    click_link "Create Ticket"
   end
   
   scenario "creating a ticket" do

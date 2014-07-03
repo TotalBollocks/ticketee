@@ -1,10 +1,17 @@
 require 'spec_helper'
 
 feature "Viewing projects" do
-  scenario "Listing all projects" do
-    project = create :project, name: "TextMate 2"
+  let(:user) {create :user}
+  let!(:project) {create :project}
+  
+  before do
+    sign_in_as user
+    define_permission user, :view, project
     visit '/'
-    click_link "TextMate 2"
+  end
+  
+  scenario "Listing all projects" do
+    click_link project.name
     expect(current_url).to eq project_url(project)
   end
 end

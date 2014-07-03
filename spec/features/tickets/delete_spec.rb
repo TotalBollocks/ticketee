@@ -6,6 +6,7 @@ feature "Deleting tickets" do
   let(:user) {create :user}
   
   scenario "Deleting a ticket" do
+    define_permission user, "view", project
     sign_in_as user
     click_link project.name
     click_link ticket.title
