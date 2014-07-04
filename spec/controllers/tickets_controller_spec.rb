@@ -14,4 +14,26 @@ describe TicketsController do
       expect(flash[:alert]).to eq "The project you were looking for could not be found"
     end
   end
+  
+  context "permission to view projects" do
+    before do
+      define_permission user, "view", project
+      sign_in user
+    end
+    
+    def cannot_create_tickets
+      expect(response).to redirect_to project
+      expect(flash[:alert]).to eq "You cannot create tickets on this project"
+    end
+    
+    it "cant use new action" do
+      get :new, project_id: project
+      cannot_create_tickets
+    end
+    
+    it "cant use create action" do
+      post :new, project_id: project
+      cannot_create_tickets
+    end
+  end
 end
