@@ -2,6 +2,16 @@
   <h2><%= @ticket.title %></h2>
   <span id="author"><%= @ticket.user.email %></span>
   <%= simple_format @ticket.description %>
+  <% if @ticket.asset.present? %>
+    <h3>Attached Files:</h3>
+    <div class="asset">
+      <p>
+        <%= link_to File.basename(@ticket.asset.path), @ticket.asset.url %>
+      </p>
+      <p><%= number_to_human_size @ticket.asset.size %></p>
+    </div>
+  <% end %>
+  
   <% authorized? "edit tickets", @project do %>
     <%= link_to "Edit Ticket", [:edit, @project, @ticket] %>
   <% end %>
