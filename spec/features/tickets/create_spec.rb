@@ -3,13 +3,13 @@ require 'spec_helper'
 feature "Creating tickets" do
   let(:user) {create :user}
   let(:project) {create :project}
+  
   before do
     define_permission user, "view", project
     sign_in_as user
     
     click_link project.name
     click_link "Create Ticket"
-    
   end
   
   scenario "creating a ticket" do
