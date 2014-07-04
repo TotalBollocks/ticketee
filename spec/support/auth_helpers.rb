@@ -11,6 +11,10 @@ module AuthHelpers
   def define_permission(user, action, thing)
     Permission.create! user: user, action: action, thing: thing
   end
+  
+  def check_permission_box(name, object)
+    check "permissions_#{object.id}_#{name}"
+  end
 end
 
 RSpec.configure do |c|

@@ -7,13 +7,17 @@ Ticketee::Application.routes.draw do
   
   namespace :admin do
     root "base#index"
-    resources :users
+    resources :users do
+      resources :permissions
+      put "permissions", to: "permissions#set", as: "set_permissions"
+    end
   end
   
   resources :users
   
   get "/signin", to: "sessions#new"
   post "/signin", to: "sessions#create"
+  delete "/signout", to: "sessions#destroy"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
