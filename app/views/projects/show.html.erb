@@ -6,7 +6,9 @@
   <%= link_to "Delete Project", @project, method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>
 
-<%= link_to "Create Ticket", [:new, @project, :ticket] %>
+<% authorized? "create tickets", @project do %>
+  <%= link_to "Create Ticket", [:new, @project, :ticket] %>
+<% end %>
 <ul id="tickets">
   <% @project.tickets.each do |ticket| %>
     <li>

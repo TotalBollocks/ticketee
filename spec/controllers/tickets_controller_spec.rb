@@ -36,6 +36,21 @@ describe TicketsController do
       cannot_create_tickets
     end
     
+    def cannot_edit_tickets
+      expect(response).to redirect_to [project, ticket]
+      expect(flash[:alert]).to eq "You cannot edit tickets on this project"
+    end
+    
+    it "cant use edit action" do
+      get :edit, project_id: project, id: ticket
+      cannot_edit_tickets
+    end
+    
+    it "cant use update action" do
+      patch :update, project_id: project, id: ticket, ticket: attributes_for(:ticket)
+      cannot_edit_tickets
+    end
+    
     it "cant use destroy action" do
       delete :destroy, project_id: project, id: ticket
       expect(response).to redirect_to project
