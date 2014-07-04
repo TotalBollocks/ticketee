@@ -35,5 +35,11 @@ describe TicketsController do
       post :new, project_id: project
       cannot_create_tickets
     end
+    
+    it "cant use destroy action" do
+      delete :destroy, project_id: project, id: ticket
+      expect(response).to redirect_to project
+      expect(flash[:alert]).to eq "You cannot delete tickets on this project"
+    end
   end
 end

@@ -7,6 +7,7 @@ feature "Deleting tickets" do
   
   scenario "Deleting a ticket" do
     define_permission user, "view", project
+    define_permission user, "delete tickets", project
     sign_in_as user
     click_link project.name
     click_link ticket.title
