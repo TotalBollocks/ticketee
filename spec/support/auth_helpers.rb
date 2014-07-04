@@ -13,7 +13,7 @@ module AuthHelpers
   end
   
   def check_permission_box(name, object)
-    check "permissions_#{object.id}_#{name}"
+    check "permissions_#{object.id}_#{name.split.join("_")}"
   end
 end
 
