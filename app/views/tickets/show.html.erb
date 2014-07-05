@@ -21,3 +21,12 @@
     <%= link_to "Delete Ticket", [@project, @ticket], method: :delete, data: {confirm: "Are you sure???"} %>
   <% end %>
 </div>
+
+<div id="comments">
+  <% if @ticket.comments.exists? %>
+    <%= render @ticket.comments.select(&:persisted?) %>
+  <% else %>
+    No comments for this ticket
+  <% end %>
+</div>
+<%= render "comments/form" %>
