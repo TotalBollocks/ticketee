@@ -7,6 +7,7 @@ feature "Creating a comment" do
   
   before do
     define_permission user, "view", project
+    create :state, name: "Open"
     sign_in_as user
     click_link project.name
   end
@@ -28,5 +29,18 @@ feature "Creating a comment" do
     click_button "Create Comment"
     expect(page).to have_content "Comment has not been created"
     expect(page).to have_content "Text can't be blank"
+  end
+  
+  scenario "Changing tickets state" do
+    comment = "Added a comment"
+    click_link ticket.title
+    fill_in "Text", with: comment
+    select "Open", from: "State"
+    click_button "Create Comment"
+    
+    expect(page).to have_content "Comment has been created"
+    within "#ticket .state" do
+      expect(page).to have_content "Open"
+    end
   end
 end
