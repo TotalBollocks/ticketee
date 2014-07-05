@@ -44,12 +44,16 @@ feature "Creating tickets" do
   scenario "Creating ticket with attachment" do
     fill_in "Title", with: "Im the best"
     fill_in "Description", with: "That ever waaaas"
-    attach_file "File", "spec/files/text.txt"
+    attach_file "File #1", "spec/files/text.txt"
+    attach_file "File #2", "spec/files/text2.txt"
+    attach_file "File #3", "spec/files/text3.txt"
     click_button "Create Ticket"
     
     expect(page).to have_content "Ticket has been created"
-    within "#ticket .asset" do  
+    within "#ticket .assets" do  
       expect(page).to have_content "text.txt"
+      expect(page).to have_content "text2.txt"
+      expect(page).to have_content "text3.txt"
     end
   end
 end
