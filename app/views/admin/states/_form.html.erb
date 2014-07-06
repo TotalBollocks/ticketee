@@ -1,0 +1,19 @@
+<%= form_for [:admin, @state] do |f| %>
+
+  <% if @state.errors.any? %>
+    <div id="error_explanation">
+      <p><%= pluralize(@state.errors.count, "Error") %>prohibiting this State from being saved:</p>
+      <ul>
+        <% @state.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <%= f.submit %>
+<% end %>

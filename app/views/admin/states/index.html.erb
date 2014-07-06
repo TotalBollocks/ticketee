@@ -1,0 +1,7 @@
+<%= link_to "New State", [:new, :admin, :state] %>
+
+<ul id="states">
+  <% @states.each do |state| %>
+    <li><%= state.name %></li>
+  <% end %>
+</ul>
