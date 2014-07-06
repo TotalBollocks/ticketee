@@ -52,4 +52,16 @@ feature "Creating a comment" do
     click_link ticket.title
     expect(page).to_not have_css "#comment_state_id"
   end
+  
+  scenario "Add tag through comment" do
+    click_link ticket.title
+    fill_in "Text", with: "Found a bug on line 42"
+    fill_in "Tags", with: "bug 42"
+    click_button "Create Comment"
+    
+    within "#ticket #tags" do
+      expect(page).to have_content "bug"
+      expect(page).to have_content "42"
+    end
+  end
 end
