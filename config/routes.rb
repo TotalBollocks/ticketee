@@ -11,7 +11,9 @@ Ticketee::Application.routes.draw do
 
   namespace :admin do
     root "base#index"
-    resources :states
+    resources :states do
+      get :make_default, on: :member
+    end
     resources :users do
       resources :permissions
       put "permissions", to: "permissions#set", as: "set_permissions"
