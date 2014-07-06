@@ -40,6 +40,22 @@ feature "Creating tickets" do
     expect(page).to have_content "Ticket has not been created"
     expect(page).to have_content "Description is too short"
   end
+  
+  scenario "create ticket with tags" do
+    fill_in "Title", with: "Some ugly thing"
+    fill_in "Description", with: "Blah blah blah blah blah"
+    fill_in "Tags", with: "ugly stupid gay"
+    click_button "Create Ticket"
+    
+    expect(page).to have_content "Ticket has been created"
+    within "#ticket #tags" do
+      expect(page).to have_content "ugly"
+      expect(page).to have_content "stupid"
+      expect(page).to have_content "gay"
+    end
+  end
+  
+  
 #   Doesnt work ... stupid book -.-  
 #   scenario "Creating ticket with attachment" do
 #     fill_in "Title", with: "Im the best"
