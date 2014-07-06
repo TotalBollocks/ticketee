@@ -2,10 +2,12 @@ class TagsController < ApplicationController
   before_action :find_ticket
   
   def remove
-    if authorized? :tag, @ticket.project
-      @tag = Ticket.tags.find params[:id]
+    if can?(:tag, @ticket.project) || current_user.admin?
+      @tag = @ticket.tags.find params[:id]
       @ticket.tags -= [@tag]
       @ticket.save
+    else
+      render nothing: true
     end
   end
   

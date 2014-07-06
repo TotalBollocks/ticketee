@@ -33,5 +33,6 @@ class Comment < ActiveRecord::Base
       self.ticket.tags += tags
       self.ticket.save
     end
+    
   end
 end
