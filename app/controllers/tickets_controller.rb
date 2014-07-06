@@ -17,6 +17,10 @@ class TicketsController < ApplicationController
   end
   
   def create
+    if cannot?(:tag, @project)
+      puts "NOT AUTHORIZED\n"*10
+      params[:ticket].delete(:tag_names)
+    end
     @ticket = @project.tickets.build(ticket_params)
     @ticket.user = current_user
     

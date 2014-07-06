@@ -7,6 +7,9 @@ Ticketee::Application.routes.draw do
 
   resources :tickets do
     resources :comments
+    resources :tags do
+      delete :remove, on: :member
+    end
   end
 
   namespace :admin do

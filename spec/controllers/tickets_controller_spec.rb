@@ -56,5 +56,13 @@ describe TicketsController do
       expect(response).to redirect_to project
       expect(flash[:alert]).to eq "You cannot delete tickets on this project"
     end
+    
+    it "can create tickets but not tag them" do
+      Permission.create!(action: "create tickets", user: user, thing: project)
+      post :create, ticket: { title: "New prob", description: "one"*4, tag_names: "not allowed"  }, project_id: project.id
+      expect(Ticket.last.tags).to be_empty
+    end
   end
+  
+  
 end

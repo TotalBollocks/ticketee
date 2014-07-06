@@ -7,6 +7,7 @@ feature "Creating a comment" do
   
   before do
     define_permission user, "view", project
+    define_permission user, "tag", project
     create :state, name: "Open"
     sign_in_as user
     click_link project.name
