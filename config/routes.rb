@@ -2,7 +2,9 @@ Ticketee::Application.routes.draw do
   root "projects#index"
   
   resources :projects do
-    resources :tickets
+    resources :tickets do
+      get :search, on: :collection
+    end
   end
 
   resources :tickets do

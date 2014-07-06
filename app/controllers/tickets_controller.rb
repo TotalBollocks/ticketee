@@ -6,6 +6,11 @@ class TicketsController < ApplicationController
   before_action :authorize_edit!, only: [:edit, :update]
   before_action :authorize_destroy!, only: :destroy
   
+  def search
+    @tickets = @project.tickets.search(params[:search])
+    render "projects/show"
+  end
+  
   def show
     @comment = @ticket.comments.build
     @states = State.all
