@@ -32,6 +32,7 @@ feature "Creating a comment" do
   end
   
   scenario "Changing tickets state" do
+    define_permission user, "change states", project
     comment = "Added a comment"
     click_link ticket.title
     fill_in "Text", with: comment
@@ -45,5 +46,10 @@ feature "Creating a comment" do
     within "#comments" do
       expect(page).to have_content "State: Open"
     end
+  end
+  
+  scenario "User without permission cant change state" do
+    click_link ticket.title
+    expect(page).to_not have_css "#comment_state_id"
   end
 end

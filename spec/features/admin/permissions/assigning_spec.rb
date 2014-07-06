@@ -69,4 +69,28 @@ feature "Assigning permissions" do
 
     expect(page).to have_content "Ticket has been deleted"
   end
+  
+  scenario "giving change states permission" do
+    create :state, name: "Open"
+    check_permission_box "change states", project
+    check_permission_box "view", project
+    click_button "Update"
+    
+    click_link "Sign out"
+    sign_in_as user
+    click_link project.name
+    click_link ticket.title
+    
+    fill_in "Text", with: "Im concerned"
+    select "Open", from: "State"
+    click_button "Create Comment"
+    
+    expect(page).to have_content "Comment has been created"
+    within "#ticket .state" do
+      expect(page).to have_content "Open"
+    end
+    within "#comments" do
+      expect(page).to have_content "State: Open"
+    end    
+  end
 end
