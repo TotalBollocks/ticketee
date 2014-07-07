@@ -1,6 +1,6 @@
 <span class="tag">
-<% authorized? :tag, @ticket.project do %>
-<%= link_to "X", remove_ticket_tag_path(@ticket, tag), method: :delete, remote: true, id: "delete-#{tag.name.parameterize}" %>
-<% end %>
-<%= tag.name %>
+  <% authorized? :tag, @ticket.project do %>
+  <%= link_to "X", remove_ticket_tag_path(@ticket, tag), method: :delete, remote: true, id: "delete-#{tag.name.parameterize}" %>
+  <% end %>
+  <%= link_to tag.name, search_project_tickets_path(@ticket.project, search: "tag:#{tag.name}") %>
 </span>

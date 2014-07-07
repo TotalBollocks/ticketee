@@ -36,4 +36,13 @@ feature "Searching" do
       expect(page).to_not have_content ticket2.state
     end
   end
+  
+  scenario "Clicking a tag to search" do
+    click_link ticket1.title
+    click_link "round1"
+    within "#tickets" do
+      expect(page).to have_content ticket1.title
+      expect(page).to_not have_content ticket2.title
+    end
+  end
 end
